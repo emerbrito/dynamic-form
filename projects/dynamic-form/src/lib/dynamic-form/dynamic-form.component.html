@@ -1,0 +1,112 @@
+<ng-container *ngIf="singlePage">
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+    <div class="form-content">
+  
+      <ng-container
+        *ngFor="let control of config.controlGroups[0].controls;"
+        ebDynamicComponent 
+        [controlConfig]="control" 
+        [formConfig]="config"
+        [group]="formGroup" >    
+      </ng-container>
+  
+    </div>
+
+    <div class="button-bar" [ngStyle]="{'text-align':buttonAlignment}">
+
+      <ng-container *ngIf="basicButtons">
+        <button mat-button type="submit" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+      </ng-container>
+
+      <ng-container *ngIf="raisedButtons">
+        <button mat-raised-button type="submit" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+      </ng-container>
+      
+      <ng-container *ngIf="flatButtons">
+        <button mat-flat-button type="submit" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+      </ng-container> 
+      
+      <ng-container *ngIf="strokedButtons">
+        <button mat-stroked-button type="submit" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+      </ng-container>
+      
+      <ng-container *ngIf="fabButtons">
+        <button mat-fab type="submit" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+      </ng-container>          
+        
+    </div>       
+  
+  </form>  
+
+</ng-container>
+
+<ng-container *ngIf="multiPage">
+
+  <ng-template matStepperIcon="done">
+    <mat-icon>done_all</mat-icon>
+  </ng-template>  
+
+  <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+
+    <mat-horizontal-stepper #stepper linear="true" [labelPosition]="stepperLabelPosition" (selectionChange)="stepChanged($event)">
+
+      <mat-step *ngFor="let group of config.controlGroups; let index = index; let last = last; let first = first;" 
+        [stepControl]="formGroup.get(group.name || 'group' + index)">
+    
+        <ng-template matStepLabel>{{group.title || 'Page ' + (index + 1)}}</ng-template>
+
+        <div class="form-content">
+  
+          <ng-container
+            *ngFor="let control of group.controls;"
+            ebDynamicComponent 
+            [controlConfig]="control" 
+            [formConfig]="config"
+            [group]="formGroup.get(group.name || 'group' + index)" >    
+          </ng-container>
+      
+        </div>        
+    
+        <div class="button-bar" [ngStyle]="{'text-align':buttonAlignment}">
+
+          <ng-container *ngIf="basicButtons">
+            <button mat-button matStepperPrevious type="button" [color]="buttonColor('previous')" [disabled]="first">{{ buttonText('previous') }}</button>          
+            <button mat-button matStepperNext type="button" [color]="buttonColor('next')" [disabled]="last">{{ buttonText('next') }}</button>          
+            <button mat-button type="button" *ngIf="last" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+          </ng-container>
+
+          <ng-container *ngIf="raisedButtons">
+            <button mat-raised-button matStepperPrevious type="button" [color]="buttonColor('previous')" [disabled]="first">{{ buttonText('previous') }}</button>          
+            <button mat-raised-button matStepperNext type="button" [color]="buttonColor('next')" [disabled]="last">{{ buttonText('next') }}</button>          
+            <button mat-raised-button type="submit" *ngIf="last" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+          </ng-container>
+          
+          <ng-container *ngIf="flatButtons">
+            <button mat-flat-button matStepperPrevious type="button" [color]="buttonColor('previous')" [disabled]="first">{{ buttonText('previous') }}</button>          
+            <button mat-flat-button matStepperNext type="button" [color]="buttonColor('next')" [disabled]="last">{{ buttonText('next') }}</button>          
+            <button mat-flat-button type="submit" *ngIf="last" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+          </ng-container> 
+          
+          <ng-container *ngIf="strokedButtons">
+            <button mat-stroked-button matStepperPrevious type="button" [color]="buttonColor('previous')" [disabled]="first">{{ buttonText('previous') }}</button>          
+            <button mat-stroked-button matStepperNext type="button" [color]="buttonColor('next')" [disabled]="last">{{ buttonText('next') }}</button>          
+            <button mat-stroked-button type="submit" *ngIf="last" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+          </ng-container>
+          
+          <ng-container *ngIf="fabButtons">
+            <button mat-fab matStepperPrevious type="button" [color]="buttonColor('previous')" [disabled]="first">{{ buttonText('previous') }}</button>          
+            <button mat-fab matStepperNext type="button" [color]="buttonColor('next')" [disabled]="last">{{ buttonText('next') }}</button>          
+            <button mat-fab type="submit" *ngIf="last" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+          </ng-container>          
+            
+        </div>    
+    
+      </mat-step>
+    
+    </mat-horizontal-stepper>      
+
+  </form>
+
+</ng-container>

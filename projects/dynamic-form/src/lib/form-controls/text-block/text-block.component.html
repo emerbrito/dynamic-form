@@ -1,0 +1,7 @@
+<label class="control-label" [ngClass]="{ 'disabled-label': disabled }"  *ngIf="config.label">{{config.label}}
+    <span class="mat-form-field-required-marker" *ngIf="required && !disabled"> *</span>
+</label> 
+
+<div class="text-block" [innerHTML]="config.text">    
+</div>
+

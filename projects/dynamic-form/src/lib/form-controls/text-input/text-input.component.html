@@ -1,0 +1,25 @@
+<div class="form-control" *ngIf="formGroup && visible" [ngClass]='{ "detached-label": !useFloatingLabel }'>
+
+  <div class="control-label" [ngClass]="{ 'disabled-label': disabled }" *ngIf="useFloatingLabel === false">
+    {{config.label}}<span class="mat-form-field-required-marker" *ngIf="required && !disabled"> *</span>
+  </div>
+
+  <mat-form-field [floatLabel]="floatLabel" [appearance]="appearance" [ngStyle]="style">
+          
+    <mat-label *ngIf="useFloatingLabel">{{config.label}}</mat-label>
+
+    <input  matInput          
+            placeholder="{{config.placeholder}}"
+            [maxlength]="maxlength"
+            [ngClass]='{ "right-align": rightAligned }'
+            [required]="config.validation && config.validation.required" 
+            [formControl]="formControl">
+
+    <span matPrefix *ngIf="config.prefix">{{config.prefix}}</span>
+    <span matSuffix *ngIf="config.sufix">{{config.sufix}}</span>              
+
+    <mat-error *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
+    <mat-hint *ngIf="config.hint">{{config.hint}}</mat-hint>
+
+  </mat-form-field>  
+</div>  

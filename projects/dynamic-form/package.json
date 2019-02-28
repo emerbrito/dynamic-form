@@ -1,0 +1,31 @@
+{
+  "name": "@emerbrito/dynamic-form",
+  "version": "0.0.1",
+  "description": "Creates forms (including complex, multi page questionnaires and surveys) from configuration. Handles conditional visibility and state (enable/disable controls).",
+  "author": {
+    "name": "Emerson Brito"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/emerbrito/dynamic-form.git"
+  },
+  "bugs": {
+    "url": "https://github.com/emerbrito/dynamic-form/issues"
+  },
+  "homepage": "https://github.com/emerbrito/dynamic-form",
+  "keywords": [
+    "angular",
+    "material",
+    "material design",
+    "dynamic",
+    "dynamic form",
+    "component",
+    "form"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/material": "^7.3.3"
+  }
+}

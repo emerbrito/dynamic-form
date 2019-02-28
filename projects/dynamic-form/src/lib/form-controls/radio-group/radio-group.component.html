@@ -1,0 +1,13 @@
+<div *ngIf="formGroup && visible" class="form-control radio-group">
+
+  <label class="control-label" [ngClass]="{ 'disabled-label': disabled }"  *ngIf="config.label">{{config.label}}
+    <span class="mat-form-field-required-marker" *ngIf="required && !disabled"> *</span>
+  </label> 
+  
+  <mat-radio-group class="radio-group" [formControl]="formControl">
+    <mat-radio-button class="radio-button" *ngFor="let item of items" [value]="item.value">{{item.text}}</mat-radio-button>
+  </mat-radio-group>
+
+  <mat-error align="end" *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
+
+</div>  

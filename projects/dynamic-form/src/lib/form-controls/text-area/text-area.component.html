@@ -1,0 +1,27 @@
+<div class="form-control" *ngIf="formGroup && visible" [ngClass]='{ "detached-label": !useFloatingLabel }'>
+
+  <div class="control-label" [ngClass]="{ 'disabled-label': disabled }" *ngIf="useFloatingLabel === false">
+    {{config.label}}<span class="mat-form-field-required-marker" *ngIf="required && !disabled"> *</span>
+  </div>
+
+  <mat-form-field [floatLabel]="floatLabel" [appearance]="appearance" [ngStyle]="style">
+          
+    <mat-label *ngIf="useFloatingLabel">{{config.label}}</mat-label>
+
+    <textarea
+      matInput
+      #input
+      placeholder="{{config.placeholder}}"
+      [maxlength]="maxlength"
+      [rows]="rows"
+      [required]="config.validation && config.validation.required" 
+      [formControl]="formControl">
+    </textarea>         
+
+    <mat-error *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
+    <mat-hint *ngIf="config.hint">{{config.hint}}</mat-hint>
+    <mat-hint *ngIf="maxlength" align="end">{{input.value?.length || 0}}/{{maxlength}}</mat-hint>
+
+  </mat-form-field>  
+
+</div>  

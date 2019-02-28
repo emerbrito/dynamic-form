@@ -1,0 +1,75 @@
+.form-content {
+    display: flex;
+    flex-direction: column;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 12px;        
+  }
+  
+  .form-content > * {
+    width: 100%;
+  }
+
+.full-width {
+  width: 100%;
+}  
+
+.detached-label {
+  font-weight: 400;
+  font-size: 12px;
+  margin-top:5px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.right-align {
+  text-align: right !important;
+}
+
+.form-control {
+}
+
+.detached-label {
+}
+
+.detached-label .mat-form-field-flex {
+  padding-top: 0 !important;
+}
+
+.control-label {
+  font-weight: 500;
+}
+
+.disabled-label {
+  color: rgba(0,0,0,.26);
+}
+
+.radio-group, .toggle-switch {
+  display: inline-flex;
+  flex-direction: column;    
+}
+
+.toggle-switch {
+  margin-bottom: 1.34375em;
+}
+
+.radio-group label:first-child, .toggle-switch label:first-child {
+  margin-bottom: 10px;
+}
+
+.radio-button {
+  margin: 5px 5px 0 5px;
+}
+
+.text-block {
+  margin-top: 10px;
+  margin-bottom: 1.34375em;
+}
+
+.button-bar {
+  margin-top: 10px;
+  padding: 0 8px;
+}
+
+.button-bar button:not(:last-child) {
+  margin-right: 6px;
+}

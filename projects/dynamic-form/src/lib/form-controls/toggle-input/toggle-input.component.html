@@ -1,0 +1,16 @@
+<div *ngIf="formGroup && visible" class="form-control toggle-switch">
+
+  <label class="control-label" [ngClass]="{ 'disabled-label': disabled }"  *ngIf="config.label">{{config.label}}
+    <span class="mat-form-field-required-marker" *ngIf="required && !disabled"> *</span>
+  </label>
+
+  <ng-container *ngIf="checkBox; else toggleTemplate">
+    <mat-checkbox [formControl]="formControl">{{config.text}}</mat-checkbox>
+  </ng-container>
+
+  <ng-template #toggleTemplate>
+    <mat-slide-toggle [formControl]="formControl">{{config.text}}</mat-slide-toggle>
+    <mat-error align="end" *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
+  </ng-template>
+  
+</div>
