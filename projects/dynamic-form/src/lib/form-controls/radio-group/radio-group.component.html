@@ -8,6 +8,6 @@
     <mat-radio-button class="radio-button" *ngFor="let item of items" [value]="item.value">{{item.text}}</mat-radio-button>
   </mat-radio-group>
 
-  <mat-error align="end" *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
+  <mat-error *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
 
 </div>  

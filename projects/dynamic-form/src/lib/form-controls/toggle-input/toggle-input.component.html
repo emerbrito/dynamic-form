@@ -10,7 +10,7 @@
 
   <ng-template #toggleTemplate>
     <mat-slide-toggle [formControl]="formControl">{{config.text}}</mat-slide-toggle>
-    <mat-error align="end" *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
+    <mat-error *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
   </ng-template>
   
 </div>
