@@ -2,12 +2,14 @@ import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, View
 import { FormGroup } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material';
+import { Observable } from 'rxjs';
 import { 
   FormConfig, 
   ButtonType,
   ButtonOptions,
   DynamicFormInternals,
-  StepSelectionEvent} from '../models';
+  StepSelectionEvent,
+  Model} from '../models';
 
 @Component({
   selector: 'eb-dynamic-form',
@@ -63,6 +65,10 @@ export class DynamicFormComponent implements OnInit {
 
     return this.config.buttons.type === ButtonType.Stroked;
 
+  }  
+  
+  get valid(): boolean {
+    return this.formGroup.valid;
   }    
 
   ngOnInit() {
@@ -157,6 +163,14 @@ export class DynamicFormComponent implements OnInit {
 
     this.stepChange.emit(e);
 
+  }
+
+  statusChanges(): Observable<any> {
+    return this.formGroup.statusChanges;
+  }
+
+  value(): Model {
+    return this.internals.value()
   }
 
 }
