@@ -3,13 +3,8 @@ import { FormGroup } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material';
 import { Observable } from 'rxjs';
-import { 
-  FormConfig, 
-  ButtonType,
-  ButtonOptions,
-  DynamicFormInternals,
-  StepSelectionEvent,
-  Model} from '../models';
+import { ButtonType } from '../models/common.models';
+import { FormConfig, ButtonOptions, DynamicFormInternals, StepSelectionEvent, Model } from '../models/config.models';
 
 @Component({
   selector: 'eb-dynamic-form',
