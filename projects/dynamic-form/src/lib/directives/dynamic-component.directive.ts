@@ -61,7 +61,14 @@ export class DynamicComponentDirective implements OnInit, OnDestroy {
   }  
 
   ngOnDestroy() {
-    this.group.get(this.controlConfig.name).setValue(null);
+
+    if(this.controlConfig && this.controlConfig.name && this.group && this.group.get(this.controlConfig.name)) {
+      let ctl = this.group.get(this.controlConfig.name);
+      if(ctl) {
+        ctl.setValue(null);
+      }      
+    }
+    
   }
 
   parseExpression(expression: string): Function {    
