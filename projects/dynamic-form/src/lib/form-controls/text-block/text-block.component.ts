@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { UtilityService } from '../../services';
-import { TextBlockOptions } from '../../models';
+import { UtilityService } from '../../services/utility.service';
+import { TextBlockOptions } from '../../models/config.models';
 import { BaseFormFieldComponent } from '../base-form-field/base-form-field.component';
 
 @Component({

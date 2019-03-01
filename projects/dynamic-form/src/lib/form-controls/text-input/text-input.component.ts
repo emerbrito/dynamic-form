@@ -1,15 +1,15 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { UtilityService } from '../../services';
-import { ContentAlignment, TextInputOptions } from '../../models';
+import { UtilityService } from '../../services/utility.service';
+import { ContentAlignment } from '../../models/common.models';
+import { TextInputOptions } from '../../models/config.models';
 import { BaseFormFieldComponent } from '../base-form-field/base-form-field.component';
 
 
 @Component({
   selector: 'eb-text-input',
   templateUrl: './text-input.component.html',
-  styleUrls: ['./text-input.component.scss'],
-  
+  styleUrls: ['./text-input.component.scss']  
 })
 export class TextInputComponent extends BaseFormFieldComponent implements OnInit {
 

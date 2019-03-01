@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { UtilityService } from '../../services';
-import { DatePickerViewMode, DatePickerOptions } from '../../models';
+import { UtilityService } from '../../services/utility.service';
+import { DatePickerViewMode } from '../../models/common.models';
+import { DatePickerOptions } from '../../models/config.models';
 import { BaseFormFieldComponent } from '../base-form-field/base-form-field.component';
 
 @Component({

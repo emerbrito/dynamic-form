@@ -1,22 +1,9 @@
 import { Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, FormControl, ValidatorFn, Validators } from '@angular/forms';
 import { UtilityService } from './utility.service';
-import { 
-  FormConfig, 
-  ControlType, 
-  ControlGroup, 
-  ErrorCodes, 
-  ValidationError, 
-  ControlOptions, 
-  FieldOptions, 
-  Appearance, 
-  LabelDisplayMode,
-  StepperLabelPosition, 
-  ContentAlignment,
-  ButtonType,
-  Color,
-  DynamicFormInternals,
-  Model} from '../models';
+import { ErrorCodes, ValidationError } from '../models/error.models';
+import { ControlType, Appearance, LabelDisplayMode, StepperLabelPosition, ContentAlignment, ButtonType, Color } from '../models/common.models';
+import { FormConfig, ControlGroup, ControlOptions, FieldOptions, DynamicFormInternals, Model } from '../models/config.models';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +14,6 @@ export class DynamicFormService {
     private fb: FormBuilder,
     private formUtility: UtilityService
   ) { }
-
 
   /**
    * Applies a flat model containing form values over existing form options.

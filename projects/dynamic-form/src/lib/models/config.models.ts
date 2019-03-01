@@ -1,6 +1,5 @@
-import { ControlType, DatePickerViewMode, LabelDisplayMode, Appearance, ContentAlignment, ToggleMode } from '.';
-import { Color, ButtonType, StepperLabelPosition as StepperTitlePosition } from './common.models';
 import { FormGroup, } from '@angular/forms';
+import { ControlType, DatePickerViewMode, LabelDisplayMode, Appearance, ContentAlignment, ToggleMode, Color, ButtonType, StepperLabelPosition } from './common.models';
 
 export interface ButtonOptions {    
     text?: string;
@@ -68,7 +67,7 @@ export interface FormConfig {
     appearance?: Appearance,
     labels?: LabelDisplayMode,
     inputWidth?: string   
-    stepperTitles?: StepperTitlePosition,     
+    stepperTitles?: StepperLabelPosition,     
     buttons?: FormButtons,   
     controlGroups: ControlGroup[],
 }

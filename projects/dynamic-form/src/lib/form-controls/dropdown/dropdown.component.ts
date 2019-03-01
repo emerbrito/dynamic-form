@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { UtilityService } from '../../services';
-import { SelectItem, DropdownOptions } from '../../models';
+import { UtilityService } from '../../services/utility.service';
+import { SelectItem, DropdownOptions } from '../../models/config.models';
 import { BaseFormFieldComponent } from '../base-form-field/base-form-field.component';
 
 @Component({

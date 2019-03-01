@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { UtilityService } from '../../services';
-import { ToggleMode, ToggleOptions } from '../../models';
+import { UtilityService } from '../../services/utility.service';
+import { ToggleMode } from '../../models/common.models';
+import { ToggleOptions } from '../../models/config.models';
 import { BaseFormFieldComponent } from '../base-form-field/base-form-field.component';
 
 @Component({

@@ -1,7 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { UtilityService } from '../../services';
-import { ContentAlignment, NumericInputOptions } from '../../models';
+import { UtilityService } from '../../services/utility.service';
+import { ContentAlignment } from '../../models/common.models';
+import { NumericInputOptions } from '../../models/config.models';
 import { BaseFormFieldComponent } from '../base-form-field/base-form-field.component';
 
 @Component({

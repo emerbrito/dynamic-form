@@ -9,7 +9,7 @@ import { TextAreaComponent } from '../form-controls/text-area/text-area.componen
 import { TextBlockComponent } from '../form-controls/text-block/text-block.component';
 import { TextInputComponent } from '../form-controls/text-input/text-input.component';
 import { ToggleInputComponent } from '../form-controls/toggle-input/toggle-input.component';
-import { ControlOptions, FormConfig } from '../models';
+import { ControlOptions, FormConfig } from '../models/config.models';
 
 const components = {
   datepicker: DatePickerComponent,

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { FieldOptions } from '../models';
+import { FieldOptions } from '../models/config.models';
 
 const DefaultMessages = {
   min: 'Minimun value is ${0}. Current: ${1}.',

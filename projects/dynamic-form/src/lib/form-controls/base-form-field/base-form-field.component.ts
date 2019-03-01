@@ -2,8 +2,9 @@ import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Subscription } from 'rxjs';
 
-import { UtilityService } from '../../services';
-import { ExtendedFieldOptions, Appearance, LabelDisplayMode, ControlType, FormConfig } from '../../models';
+import { UtilityService } from '../../services/utility.service';
+import { Appearance, LabelDisplayMode, ControlType } from '../../models/common.models';
+import { ExtendedFieldOptions, FormConfig } from '../../models/config.models';
 
 @Component({
   selector: 'eb-base-form-field',
