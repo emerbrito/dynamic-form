@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
+import { Component, OnInit, OnChanges, Input, ViewEncapsulation, Output, EventEmitter, ViewChild, SimpleChanges, SimpleChange } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
 import { MatStepper } from '@angular/material';
@@ -17,7 +17,7 @@ import {
   styleUrls: ['./dynamic-form.component.css'],
   encapsulation: ViewEncapsulation.None
 })
-export class DynamicFormComponent implements OnInit {
+export class DynamicFormComponent implements OnInit, OnChanges {
 
   @Output() submitted: EventEmitter<DynamicFormInternals> = new EventEmitter<DynamicFormInternals>();   
   @Output() stepChange: EventEmitter<StepSelectionEvent> = new EventEmitter<StepSelectionEvent>();        
@@ -72,8 +72,22 @@ export class DynamicFormComponent implements OnInit {
   }    
 
   ngOnInit() {
-    this.config = this.internals.settings;
-    this.formGroup = this.internals.form;
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+
+    let data: SimpleChange = changes.internals
+    let value: DynamicFormInternals
+
+    if(data && data.currentValue) {      
+      value = data.currentValue;
+      if(this.stepper) {
+        this.stepper.reset();
+      }
+      this.config = value.settings;
+      this.formGroup = value.form;
+    }
+
   }
 
   reset(): void {
