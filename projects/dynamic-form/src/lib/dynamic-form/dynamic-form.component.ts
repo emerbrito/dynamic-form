@@ -1,6 +1,7 @@
-import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { MatStepper } from '@angular/material';
 import { 
   FormConfig, 
   ButtonType,
@@ -20,6 +21,7 @@ export class DynamicFormComponent implements OnInit {
   @Output() stepChange: EventEmitter<StepSelectionEvent> = new EventEmitter<StepSelectionEvent>();        
   @Input() internals: DynamicFormInternals;
 
+  @ViewChild('stepper') stepper: MatStepper;
   config: FormConfig;
   formGroup: FormGroup;
 
@@ -68,9 +70,14 @@ export class DynamicFormComponent implements OnInit {
     this.formGroup = this.internals.form;
   }
 
-  public reset(): void {
-    this.formGroup.reset();
-  }  
+  reset(): void {
+    if(this.stepper) {
+      this.stepper.reset();
+    }    
+    else {
+      this.formGroup.reset();
+    }
+  } 
 
   buttonColor(buttonName: string) {
 
