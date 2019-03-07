@@ -9,6 +9,7 @@ const DefaultMessages = {
   email: 'Invalid email.',
   minLength: 'Minimun length is {0}. Current: {1}.',
   maxLength: 'Maximun length is {0}. Current: {1}.',
+  matDatepickerParse: 'Invalid date',
   pattern: "Value didn't match the expected pattern."
 };
 
