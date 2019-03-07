@@ -81,7 +81,8 @@ export interface NumericInputOptions extends ExtendedFieldOptions {
     value?: number,
     prefix?: string,
     sufix?: string,
-    decimals?: number
+    decimals?: number,
+    decimalSeparator?: string
 }
 
 export interface RadioGroupOptions extends FieldOptions {

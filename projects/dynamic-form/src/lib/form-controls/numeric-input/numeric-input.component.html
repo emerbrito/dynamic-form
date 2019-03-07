@@ -9,8 +9,10 @@
     <mat-label *ngIf="useFloatingLabel">{{config.label}}</mat-label>
 
     <input  matInput                
-            ebNumbersOnly
+            ebNumbersOnly            
             placeholder="{{config.placeholder}}"
+            [decimals]="config.decimals"
+            [decimalSeparator]="config.decimalSeparator"            
             [maxlength]="maxlength"
             [ngClass]='{ "right-align": rightAligned }'
             [required]="config.validation && config.validation.required" 
