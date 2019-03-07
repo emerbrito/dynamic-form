@@ -32,12 +32,11 @@ export class NumericInputComponent extends BaseFormFieldComponent implements OnI
 
   get rightAligned(): boolean {
 
-    // default to right aligned
-    if(!this.config.align || this.config.align === ContentAlignment.Right) {
-      return true;
+    if(!this.config.align || this.config.align === ContentAlignment.Left) {
+      return false;
     }
 
-    return false;
+    return true;
   }
 
   ngOnInit() {
