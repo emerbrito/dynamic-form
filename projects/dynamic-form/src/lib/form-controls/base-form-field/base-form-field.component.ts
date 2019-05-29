@@ -166,7 +166,8 @@ export class BaseFormFieldComponent implements OnInit, OnDestroy {
     let disableState: boolean;
     let visibileState: boolean;
 
-    if(this.disabledCondition) {
+    // only execute disable condition if form is not completelly disabled.
+    if(!this.formGroup.disabled && this.disabledCondition) {
       disableState = this.disabledCondition(this.formGroup);
       this.setDisabled(disableState);
     }

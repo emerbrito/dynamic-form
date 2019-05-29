@@ -94,7 +94,8 @@ export class AppComponent implements OnInit {
     sampleData = {
       fullname: 'John Doe',
       affiliation: 3,
-      registered: true
+      registered: true,
+      agree: true
     }
 
     this.data = this.service.create(config, sampleData);

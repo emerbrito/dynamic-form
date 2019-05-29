@@ -16,7 +16,8 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 
   @Output() submitted: EventEmitter<DynamicFormInternals> = new EventEmitter<DynamicFormInternals>();   
   @Output() stepChange: EventEmitter<StepSelectionEvent> = new EventEmitter<StepSelectionEvent>();        
-  @Input() internals: DynamicFormInternals;
+  @Input() internals: DynamicFormInternals;  
+  @Input() disabled: boolean;  
 
   @ViewChild('stepper') stepper: MatStepper;
   config: FormConfig;
@@ -30,6 +31,10 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 
   get buttonAlignment(): string {
     return this.config.buttons.align; 
+  }
+
+  get disableSubmit(): boolean {
+    return this.formGroup.disabled || this.formGroup.invalid;
   }
 
   get fabButtons(): boolean {    
@@ -71,16 +76,26 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 
   ngOnChanges(changes: SimpleChanges) {
 
-    let data: SimpleChange = changes.internals
+    let changesInternals: SimpleChange = changes.internals;
+    let changesDisabled: SimpleChange = changes.disabled;
     let value: DynamicFormInternals
 
-    if(data && data.currentValue) {      
-      value = data.currentValue;
+    if(changesInternals && changesInternals.currentValue) {      
+      value = changesInternals.currentValue;
       if(this.stepper) {
         this.stepper.reset();
       }
       this.config = value.settings;
       this.formGroup = value.form;
+    }
+
+    if(changesDisabled != null) {
+      if(changesDisabled.currentValue == true) {
+        this.formGroup.disable();
+      }
+      else {
+        this.formGroup.enable();
+      }
     }
 
   }
