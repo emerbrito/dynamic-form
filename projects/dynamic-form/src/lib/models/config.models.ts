@@ -76,6 +76,10 @@ export interface Model {
     [controlName: string] : any
 }
 
+export interface MultiSelectOptions extends FieldOptions {
+    items?: SelectItem[]
+}
+
 export interface NumericInputOptions extends ExtendedFieldOptions {
     align?: ContentAlignment,
     value?: number,

@@ -3,6 +3,7 @@ import { FormGroup } from '@angular/forms';
 
 import { DatePickerComponent } from '../form-controls/date-picker/date-picker.component';
 import { DropdownComponent } from '../form-controls/dropdown/dropdown.component';
+import { MultiSelectComponent } from '../form-controls/multi-select/multi-select.component';
 import { NumericInputComponent } from '../form-controls/numeric-input/numeric-input.component';
 import { RadioGroupComponent } from '../form-controls/radio-group/radio-group.component';
 import { TextAreaComponent } from '../form-controls/text-area/text-area.component';
@@ -14,6 +15,7 @@ import { ControlOptions, FormConfig } from '../models/config.models';
 const components = {
   datepicker: DatePickerComponent,
   dropdown: DropdownComponent,
+  multiselect: MultiSelectComponent,
   numeric: NumericInputComponent,
   radiogroup: RadioGroupComponent,        
   textarea: TextAreaComponent,

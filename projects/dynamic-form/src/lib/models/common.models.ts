@@ -26,6 +26,7 @@ export const enum Appearance {
 export const enum ControlType {    
     Datepicker = 'datepicker',
     Dropdown = 'dropdown',
+    MultiSelect = 'multiselect',
     NumericInput = 'numeric',
     RadioGroup = 'radiogroup',    
     Slider = 'slider',    

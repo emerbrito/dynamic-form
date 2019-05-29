@@ -60,7 +60,21 @@ export class AppComponent implements OnInit {
             expressions: {
               disabled: '!${registered};'
             }
-          } as RadioGroupOptions,               
+          } as RadioGroupOptions,   
+          {
+            name: 'countries',
+            label: "Countries Visited Past 6 Months",            
+            type: ControlType.MultiSelect,
+            items: [
+              { value: 1, text: 'Brazil' },
+              { value: 2, text: 'Colombia' },
+              { value: 3, text: 'USA' },
+              { value: 4, text: 'Spain' },
+            ],
+            expressions: {
+              disabled: '!${registered};'
+            }            
+          } as RadioGroupOptions,                         
         ] 
       },      
       {
@@ -96,7 +110,8 @@ export class AppComponent implements OnInit {
       fullname: 'John Doe',
       affiliation: 3,
       registered: true,
-      agree: true
+      agree: true,
+      countries: [2,4]
     }
 
     this.data = this.service.create(config, sampleData);
@@ -107,6 +122,7 @@ export class AppComponent implements OnInit {
   submit(e: DynamicFormInternals): void {
     console.log('submitted');
     console.log(e);
+    console.log(e.value());
   }
 
 }
