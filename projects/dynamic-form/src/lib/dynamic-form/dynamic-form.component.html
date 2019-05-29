@@ -98,7 +98,7 @@
           <ng-container *ngIf="fabButtons">
             <button mat-fab matStepperPrevious type="button" [color]="buttonColor('previous')" [disabled]="first">{{ buttonText('previous') }}</button>          
             <button mat-fab matStepperNext type="button" [color]="buttonColor('next')" [disabled]="last">{{ buttonText('next') }}</button>          
-            <button mat-fab type="submit" *ngIf="last" [color]="buttonColor('submit')" [disabled]="formGroup.invalid">{{ buttonText('submit') }}</button>  
+            <button mat-fab type="submit" *ngIf="last" [color]="buttonColor('submit')" [disabled]="formGroup.invalid || formGroup.disabled">{{ buttonText('submit') }}</button>  
           </ng-container>          
             
         </div>    
