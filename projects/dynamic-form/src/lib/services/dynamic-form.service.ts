@@ -59,7 +59,7 @@ export class DynamicFormService {
 
     this.validateFormOptions(options);
     newOptions = this.cloneWithDefaults(options);
-    this.applyValues(newOptions, values);
+    newOptions = this.applyValues(newOptions, values);
 
     if(newOptions.controlGroups.length > 1) {
       

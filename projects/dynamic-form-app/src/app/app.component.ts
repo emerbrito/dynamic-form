@@ -23,6 +23,7 @@ export class AppComponent implements OnInit {
   ngOnInit() {
 
     let config = {} as FormConfig;
+    let sampleData: { [key:string]: any} = {}
     
     config.controlGroups = [
       {
@@ -90,7 +91,13 @@ export class AppComponent implements OnInit {
       },            
     ];
 
-    this.data = this.service.create(config);
+    sampleData = {
+      fullname: 'John Doe',
+      affiliation: 3,
+      registered: true
+    }
+
+    this.data = this.service.create(config, sampleData);
     console.log(this.data);
 
   }
