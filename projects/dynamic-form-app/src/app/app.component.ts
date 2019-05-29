@@ -1,5 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { UtilityService, DynamicFormService, FormConfig, ControlType, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, ToggleMode  } from 'dynamic-form';
+
+import { UtilityService } from 'projects/dynamic-form/src/lib/services/utility.service';
+import { DynamicFormService } from 'projects/dynamic-form/src/lib/services/dynamic-form.service';
+import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions } from 'projects/dynamic-form/src/lib/models/config.models';
+import { ControlType, ToggleMode } from 'projects/dynamic-form/src/lib/models/common.models';
+//import { UtilityService, DynamicFormService, FormConfig, ControlType, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, ToggleMode  } from 'dynamic-form';
 
 @Component({
   selector: 'eb-root',
