@@ -39,7 +39,8 @@ export class AppComponent implements OnInit {
           {
             name: 'city',
             label: "City",
-            type: ControlType.TextInput
+            type: ControlType.TextInput,
+            hint: 'Enter the city name'
           } as TextInputOptions,
           {
             name: 'registered',
