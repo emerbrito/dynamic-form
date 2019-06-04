@@ -3,12 +3,12 @@ import { FormControl } from '@angular/forms';
 import { FieldOptions } from '../models/config.models';
 
 const DefaultMessages = {
-  min: 'Minimun value is ${0}. Current: ${1}.',
-  max: 'Maximun value is {0}. Current: {1}.',
+  min: 'Minimun value is {1}. Current: {2}.',
+  max: 'Maximun value is {1}. Current: {2}.',
   required: 'You must enter a value.',
   email: 'Invalid email.',
-  minLength: 'Minimun length is {0}. Current: {1}.',
-  maxLength: 'Maximun length is {0}. Current: {1}.',
+  minLength: 'Minimun length is {1}. Current: {2}.',
+  maxLength: 'Maximun length is {1}. Current: {2}.',
   matDatepickerParse: 'Invalid date',
   pattern: "Value didn't match the expected pattern."
 };
@@ -55,6 +55,7 @@ export class UtilityService {
         else {
           msg = this.formatString(errorMsg, options.label, error.min, error.actual);
         }
+        break;
                 
       case 'max':
         if (typeof errorMsg === "function") {
@@ -62,7 +63,8 @@ export class UtilityService {
         }         
         else {
           msg = this.formatString(errorMsg, options.label, error.max, error.actual);
-        }              
+        }     
+        break;         
 
       case 'minLength':  
         if (typeof errorMsg === "function") {
@@ -70,7 +72,8 @@ export class UtilityService {
         }         
         else {
           msg = this.formatString(errorMsg, options.label, error.requiredLength, error.actualLength);
-        }            
+        }     
+        break;       
 
       case 'maxLength':
         if (typeof errorMsg === "function") {
@@ -78,7 +81,8 @@ export class UtilityService {
         }         
         else {
           msg = this.formatString(errorMsg, options.label, error.requiredLength, error.actualLength)
-        }              
+        }     
+        break;         
 
       default:
         if (typeof errorMsg === "function") {
@@ -100,9 +104,11 @@ export class UtilityService {
    */
   formatString(message: string, ...params: any[]): string {
     let m = message;
-
     if(params && params.length > 0) {
         params.forEach((value, i) => {
+            if(params.length === 3) {
+              debugger;
+            }
             m = m.replace(new RegExp('\\{' + i + '\\}', 'gm'), value);
         });
     }

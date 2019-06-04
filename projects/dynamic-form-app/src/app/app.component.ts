@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UtilityService } from 'projects/dynamic-form/src/lib/services/utility.service';
 import { DynamicFormService } from 'projects/dynamic-form/src/lib/services/dynamic-form.service';
-import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions } from 'projects/dynamic-form/src/lib/models/config.models';
+import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, NumericInputOptions } from 'projects/dynamic-form/src/lib/models/config.models';
 import { ControlType, ToggleMode } from 'projects/dynamic-form/src/lib/models/common.models';
 //import { UtilityService, DynamicFormService, FormConfig, ControlType, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, ToggleMode  } from 'dynamic-form';
 
@@ -36,6 +36,15 @@ export class AppComponent implements OnInit {
               required: true
             }
           } as TextInputOptions,
+          {
+            name: 'age',
+            label: "Age",
+            type: ControlType.NumericInput,
+            validation: {
+              max: 55,
+              min: 18
+            }
+          } as NumericInputOptions,          
           {
             name: 'city',
             label: "City",
