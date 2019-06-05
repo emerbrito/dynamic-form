@@ -149,10 +149,17 @@ export class BaseFormFieldComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-         
+  
     if(this.disabledCondition || this.visibleCondition) {
       this.onFormChanges();
-      this.stateSubscription = this.formGroup.valueChanges.subscribe(value => this.onFormChanges());
+
+      if(this.formGroup.parent) {
+        this.stateSubscription = this.formGroup.parent.valueChanges.subscribe(value => this.onFormChanges());
+      }
+      else {
+        this.stateSubscription = this.formGroup.valueChanges.subscribe(value => this.onFormChanges());
+      }
+      
     }    
 
   }
@@ -168,12 +175,26 @@ export class BaseFormFieldComponent implements OnInit, OnDestroy {
 
     // only execute disable condition if form is not completelly disabled.
     if(!this.formGroup.disabled && this.disabledCondition) {
-      disableState = this.disabledCondition(this.formGroup);
+
+      if(this.formGroup.parent) {
+        disableState = this.disabledCondition(this.formGroup.parent as FormGroup);
+      }
+      else {
+        disableState = this.disabledCondition(this.formGroup);
+      }
+
       this.setDisabled(disableState);
     }
 
     if(this.visibleCondition) {
-      visibileState = this.visibleCondition(this.formGroup);
+      
+      if(this.formGroup.parent) {
+        visibileState = this.visibleCondition(this.formGroup.parent as FormGroup);
+      }
+      else {
+        visibileState = this.visibleCondition(this.formGroup);
+      }
+
       this.setVisible(visibileState);
     }
 

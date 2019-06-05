@@ -22,6 +22,7 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   @ViewChild('stepper') stepper: MatStepper;
   config: FormConfig;
   formGroup: FormGroup;
+  controlPath: { [key:string]: string } = {};
 
   constructor() { }
   
@@ -86,7 +87,8 @@ export class DynamicFormComponent implements OnInit, OnChanges {
         this.stepper.reset();
       }
       this.config = value.settings;
-      this.formGroup = value.form;
+      this.formGroup = value.form; 
+      this.mapPath();     
     }
 
     if(changesDisabled != null) {
@@ -170,6 +172,21 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 
     return text;
 
+  }
+
+  mapPath() {
+
+    let path = {};
+    let length = this.config.controlGroups.length;
+
+    for (let i = 0; i < length; i++) {
+      const group = this.config.controlGroups[i];
+      group.controls.forEach(ctl => {
+        path[ctl.name] = `${group.name || 'group' + i}.${ctl.name}`
+      })      
+    }
+
+    this.controlPath = path;
   }
 
   onSubmit(): void {

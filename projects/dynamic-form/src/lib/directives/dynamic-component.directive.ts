@@ -1,5 +1,5 @@
 import { Directive, Input, ComponentFactoryResolver, ViewContainerRef, OnInit, OnDestroy, ComponentRef } from '@angular/core';
-import { FormGroup } from '@angular/forms';
+import { FormGroup, FormControl, AbstractControl } from '@angular/forms';
 
 import { DatePickerComponent } from '../form-controls/date-picker/date-picker.component';
 import { DropdownComponent } from '../form-controls/dropdown/dropdown.component';
@@ -30,7 +30,8 @@ const components = {
 export class DynamicComponentDirective implements OnInit, OnDestroy {
 
   @Input() controlConfig : ControlOptions;
-  @Input() formConfig: FormConfig;    
+  @Input() formConfig: FormConfig;
+  @Input() controlPath: { [key: string]: string };
   @Input() group: FormGroup;  
   component: ComponentRef<any>;
   _group: FormGroup;    
@@ -77,12 +78,24 @@ export class DynamicComponentDirective implements OnInit, OnDestroy {
 
     /**
      * Gets an expression such as:
-     * group.get('age').value > 45
-     * And return a function:
+     * controlValue('code').length > 3
+     * and return a function. Note that the "controlValue" method is built into the function.
+     * Function should look like this:
      * function(group) { return [inline_expression] }
      */
 
-    var body = "return " + this.expTokenReplacement(expression);
+    var body = `
+    let controlValue = function(name) {
+      let value = null;
+      let ctl = group.get(name);
+      if(ctl) {        
+        value = ctl.value;
+      }
+      return value;
+    };
+    return ${this.expTokenReplacement(expression)}`;
+
+    //var body = "return " + this.expTokenReplacement(expression);
     return new Function('group', body);
   }
   
@@ -91,22 +104,39 @@ export class DynamicComponentDirective implements OnInit, OnDestroy {
     /**
      * An expression should contain control names enclosed by brackes such as:
      * ${code} && ${code}.length > 3
-     * These 'tokens' must be replaced into actual script the will pull the control from the form group as such:
-     * group.get('code').value && group.get('code').value.length > 3 
+     * These 'tokens' must be replaced with a function name that will pull the control value from the from group such as:
+     * controlValue('code') && controlValue('code').length > 3 
      */
-
-
-    let js: string = null;
 
     if(expression == null) {
       return "true";
     }
 
-    js = expression.replace(/\${/g, "group.get('");
-    js = js.replace(/(group.get\('[\w-]*?)(})/g, "$1').value");
+    const tokenPattern = /\${.*?}/g;
+    const fieldPattern = /\${(.*?)}/;
+    const tokens = expression.match(tokenPattern);
 
-    return js;
+    for(let i=0; i < tokens.length; i++) {
+	
+      const nameMatch = fieldPattern.exec(tokens[i]);
 
+      if(nameMatch && nameMatch[1]) {
+
+        const fieldName = nameMatch[1];
+        const path = this.controlPath[fieldName];
+        const token = new RegExp(this.escapeToken(tokens[i]), 'g');
+
+        expression = expression.replace(token, `controlValue('${path}')`);
+      }
+
+    }    
+
+    return expression;
+
+  }  
+
+  escapeToken(stringValue: string): string {
+    return stringValue.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); // $& means the whole matched string
   }  
 
 }

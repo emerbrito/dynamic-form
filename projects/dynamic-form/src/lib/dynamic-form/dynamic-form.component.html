@@ -64,7 +64,8 @@
             ebDynamicComponent 
             [controlConfig]="control" 
             [formConfig]="config"
-            [group]="formGroup.get(group.name || 'group' + index)" >    
+            [group]="formGroup.get(group.name || 'group' + index)"
+            [controlPath]="controlPath">
           </ng-container>
       
         </div>        
