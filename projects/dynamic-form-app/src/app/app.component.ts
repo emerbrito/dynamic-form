@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
 
     let config = {} as FormConfig;
     let sampleData: { [key:string]: any} = {}
-    
+   
     config.controlGroups = [
       {
         controls: [
@@ -55,7 +55,10 @@ export class AppComponent implements OnInit {
             name: 'registered',
             label: 'Voter Registration',
             text: "Registered voter",            
-            type: ControlType.ToogleButton
+            type: ControlType.ToogleButton,
+            expressions: {
+              visible: "${age} > 18"
+            }
           } as ToggleOptions,
           {
             name: 'affiliation',
@@ -115,13 +118,13 @@ export class AppComponent implements OnInit {
       },            
     ];
 
-    sampleData = {
-      fullname: 'John Doe',
-      affiliation: 3,
-      registered: true,
-      agree: true,
-      countries: [2,4]
-    }
+    // sampleData = {
+    //   fullname: 'John Doe',
+    //   affiliation: 3,
+    //   registered: true,
+    //   agree: true,
+    //   countries: [2,4]
+    // }
 
     this.data = this.service.create(config, sampleData);
     console.log(this.data);

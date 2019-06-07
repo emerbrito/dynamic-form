@@ -7,6 +7,7 @@
       <ng-container
         *ngFor="let control of config.controlGroups[0].controls;"
         ebDynamicComponent 
+        [controlPath]="controlsFullPath"
         [controlConfig]="control" 
         [formConfig]="config"
         [group]="formGroup" >    
@@ -61,11 +62,11 @@
   
           <ng-container
             *ngFor="let control of group.controls;"
-            ebDynamicComponent 
+            ebDynamicComponent                         
             [controlConfig]="control" 
+            [controlPath]="controlsFullPath"
             [formConfig]="config"
-            [group]="formGroup.get(group.name || 'group' + index)"
-            [controlPath]="controlPath">
+            [group]="formGroup.get(group.name || 'group' + index)">
           </ng-container>
       
         </div>        

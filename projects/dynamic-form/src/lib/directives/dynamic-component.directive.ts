@@ -39,7 +39,9 @@ export class DynamicComponentDirective implements OnInit, OnDestroy {
   constructor(
     private resolver: ComponentFactoryResolver,
     private container: ViewContainerRef    
-  ) { }
+  ) 
+  { 
+  }
 
   ngOnInit() {
 

@@ -22,7 +22,7 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   @ViewChild('stepper') stepper: MatStepper;
   config: FormConfig;
   formGroup: FormGroup;
-  controlPath: { [key:string]: string } = {};
+  controlsFullPath: { [key:string]: string } = {};
 
   constructor() { }
   
@@ -86,9 +86,10 @@ export class DynamicFormComponent implements OnInit, OnChanges {
       if(this.stepper) {
         this.stepper.reset();
       }
+      
+      this.controlsFullPath = this.mapPath(value.settings);
       this.config = value.settings;
-      this.formGroup = value.form; 
-      this.mapPath();     
+      this.formGroup = value.form;         
     }
 
     if(changesDisabled != null) {
@@ -174,19 +175,30 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 
   }
 
-  mapPath() {
+  mapPath(config: FormConfig): { [key:string]: string } {
 
     let path = {};
-    let length = this.config.controlGroups.length;
+    let length = config.controlGroups.length;
 
-    for (let i = 0; i < length; i++) {
-      const group = this.config.controlGroups[i];
+    if(config.controlGroups.length == 1) {
+      // single page form, all controls are at the root level.
+      const group = config.controlGroups[0];
       group.controls.forEach(ctl => {
-        path[ctl.name] = `${group.name || 'group' + i}.${ctl.name}`
-      })      
+        path[ctl.name] = ctl.name;
+      });
+    }
+    else {
+      // more than one group.
+      // in multi page scenarions each control are nested under page.
+      for (let i = 0; i < length; i++) {
+        const group = config.controlGroups[i];
+        group.controls.forEach(ctl => {
+          path[ctl.name] = `${group.name || 'group' + i}.${ctl.name}`
+        })      
+      }
     }
 
-    this.controlPath = path;
+    return path;
   }
 
   onSubmit(): void {

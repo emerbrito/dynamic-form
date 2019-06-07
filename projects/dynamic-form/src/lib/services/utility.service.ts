@@ -107,7 +107,6 @@ export class UtilityService {
     if(params && params.length > 0) {
         params.forEach((value, i) => {
             if(params.length === 3) {
-              debugger;
             }
             m = m.replace(new RegExp('\\{' + i + '\\}', 'gm'), value);
         });
