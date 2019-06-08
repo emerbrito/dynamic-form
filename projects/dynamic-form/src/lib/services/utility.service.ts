@@ -10,7 +10,8 @@ const DefaultMessages = {
   minLength: 'Minimun length is {1}. Current: {2}.',
   maxLength: 'Maximun length is {1}. Current: {2}.',
   matDatepickerParse: 'Invalid date',
-  pattern: "Value didn't match the expected pattern."
+  pattern: "Value didn't match the expected pattern.",
+  timeError: "Invalid time."
 };
 
 @Injectable({

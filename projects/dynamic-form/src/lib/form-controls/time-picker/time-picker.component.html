@@ -8,15 +8,11 @@
           
     <mat-label *ngIf="useFloatingLabel">{{config.label}}</mat-label>
 
-    <input  matInput                 
-            placeholder="{{config.placeholder}}"
-            [maxlength]="maxlength"
-            [ngClass]='{ "right-align": rightAligned }'
-            [required]="config.validation && config.validation.required" 
-            [formControl]="formControl">
-
-    <span matPrefix *ngIf="config.prefix">{{config.prefix}}</span>
-    <span matSuffix *ngIf="config.sufix">{{config.sufix}}</span>              
+    <eb-time-picker-control
+      placeholder="{{config.placeholder}}"
+      [required]="config.validation && config.validation.required"
+      [formControl]="formControl">
+    </eb-time-picker-control>
 
     <mat-error *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
     <mat-hint *ngIf="config.hint">{{config.hint}}</mat-hint>

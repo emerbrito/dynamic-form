@@ -33,6 +33,7 @@ export const enum ControlType {
     TextArea = 'textarea',
     TextBlock = 'textblock',
     TextInput = 'input',    
+    Timepicker = 'timepicker',
     ToogleButton = 'tooglebutton'
 }
 

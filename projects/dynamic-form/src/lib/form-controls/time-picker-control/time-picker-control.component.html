@@ -1,0 +1,11 @@
+<div class="wrapper" [formGroup]="parts">
+  <input matInput class="input" size="2" maxlength="2" formControlName="hour"/>
+  <span>:</span>
+  <input matInput class="input" size="2" maxlength="2" formControlName="min"/>
+  <div class="select">
+    <mat-select formControlName="period">
+      <mat-option value="AM">AM</mat-option>
+      <mat-option value="PM">PM</mat-option>
+    </mat-select>
+  </div>
+</div>

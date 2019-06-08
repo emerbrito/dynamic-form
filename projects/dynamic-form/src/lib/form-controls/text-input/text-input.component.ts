@@ -23,6 +23,10 @@ export class TextInputComponent extends BaseFormFieldComponent implements OnInit
     super(utility);
   }
 
+  get mask(): string {
+    return this.config.mask;
+  }
+
   get maxlength(): string {
     let ml: string = null;
     if(this.config.validation && this.config.validation.maxLength) {

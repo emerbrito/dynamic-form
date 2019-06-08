@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UtilityService } from 'projects/dynamic-form/src/lib/services/utility.service';
 import { DynamicFormService } from 'projects/dynamic-form/src/lib/services/dynamic-form.service';
-import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, NumericInputOptions } from 'projects/dynamic-form/src/lib/models/config.models';
+import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, NumericInputOptions, TimePickerOptions } from 'projects/dynamic-form/src/lib/models/config.models';
 import { ControlType, ToggleMode } from 'projects/dynamic-form/src/lib/models/common.models';
 //import { UtilityService, DynamicFormService, FormConfig, ControlType, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, ToggleMode  } from 'dynamic-form';
 
@@ -28,6 +28,12 @@ export class AppComponent implements OnInit {
     config.controlGroups = [
       {
         controls: [
+          {
+            name: 'time',
+            label: "Time",
+            type: ControlType.Timepicker,
+            value: '12:45 PM'          
+          } as TimePickerOptions,          
           {
             name: 'fullname',
             label: "Full Name",

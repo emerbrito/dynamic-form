@@ -9,6 +9,7 @@ import { RadioGroupComponent } from '../form-controls/radio-group/radio-group.co
 import { TextAreaComponent } from '../form-controls/text-area/text-area.component';
 import { TextBlockComponent } from '../form-controls/text-block/text-block.component';
 import { TextInputComponent } from '../form-controls/text-input/text-input.component';
+import { TimePickerComponent } from '../form-controls/time-picker/time-picker.component';
 import { ToggleInputComponent } from '../form-controls/toggle-input/toggle-input.component';
 import { ControlOptions, FormConfig } from '../models/config.models';
 
@@ -20,6 +21,7 @@ const components = {
   radiogroup: RadioGroupComponent,        
   textarea: TextAreaComponent,
   textblock: TextBlockComponent,
+  timepicker: TimePickerComponent,
   input: TextInputComponent,
   tooglebutton: ToggleInputComponent
 };

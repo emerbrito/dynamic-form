@@ -1,0 +1,22 @@
+.wrapper {
+    display: flex;
+}
+.input {
+    width: 30px;
+    text-align: center;
+    /* display: inline-block; */
+}
+
+.select {
+    /* display: inline-block;
+    width: 50px; */
+    flex: 1;
+}
+
+span {
+    opacity: 0;
+    transition: opacity 200ms;
+}
+:host.floating span {
+    opacity: 1;
+}

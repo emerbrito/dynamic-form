@@ -118,8 +118,19 @@ export interface TextBlockOptions extends ControlOptions {
 export interface TextInputOptions extends ExtendedFieldOptions {
     align?: ContentAlignment,
     value?: string,
+    mask?: string,
     prefix?: string,
-    sufix?: string    
+    sufix?: string
+}
+
+export interface TimeDefinition {
+    hour: string,
+    min: string,
+    period: string
+}
+
+export interface TimePickerOptions extends ExtendedFieldOptions {
+    value?: string
 }
 
 export interface ToggleOptions extends FieldOptions {
@@ -147,6 +158,10 @@ export interface ValidationMessages {
     minLength: string | ((label: string, minLength: number, actualLength: number) => string) | (() => string),
     maxLength: string | ((label: string, maxLength: number, actualLength: number) => string) | (() => string),
     pattern: string | ((label: string) => string) | (() => string),
+}
+
+export class Time implements TimeDefinition {
+    constructor(public hour: string, public min: string, public period: string){}
 }
 
 export class DynamicFormInternals {

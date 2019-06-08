@@ -4,6 +4,7 @@ import { UtilityService } from './utility.service';
 import { ErrorCodes, ValidationError } from '../models/error.models';
 import { ControlType, Appearance, LabelDisplayMode, StepperLabelPosition, ContentAlignment, ButtonType, Color } from '../models/common.models';
 import { FormConfig, ControlGroup, ControlOptions, FieldOptions, DynamicFormInternals, Model } from '../models/config.models';
+import { timeValidator } from '../models/time.validator';
 
 @Injectable({
   providedIn: 'root'
@@ -266,7 +267,7 @@ export class DynamicFormService {
   private createControl(options: FieldOptions): FormControl {
 
     let control: FormControl;
-    let validators: ValidatorFn[];
+    let validators: ValidatorFn[] = [];
     let initialValue: any = null;
 
     if(!options) {
@@ -281,14 +282,22 @@ export class DynamicFormService {
       initialValue = options.value;
     }
 
+    if(options.type === ControlType.Timepicker) {
+      validators.push(timeValidator);
+    }
+
     if(options.validation) {
-      validators = this.builtInValidators(options);
+      validators = validators.concat(this.builtInValidators(options));      
+      control = this.fb.control(initialValue, validators);
+    }
+
+    if(validators.length > 0) {
       control = this.fb.control(initialValue, validators);
     }
     else {
-      control = this.fb.control(initialValue);
-    }
-  
+      control = this.fb.control(initialValue);  
+    }    
+      
     return control;
 
   }
