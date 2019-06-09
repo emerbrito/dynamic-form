@@ -11,11 +11,16 @@ export function timeValidator(control: AbstractControl): ValidationErrors | null
   let value: TimeDefinition =  timeFromString(control.value);
   let err = { timeError: true };
 
-  if(!value.hour && !value.min) {
+  // unable to parse
+  if(value === null) {
+    return err; 
+  }
+
+  if(!value.hour && !value.min && !value.period) {
     return null;
   }  
 
-  if(!value.hour || !value.min) {
+  if(!value.hour || !value.min || !value.period) {
     return err;
   }
 
@@ -31,7 +36,7 @@ export function timeValidator(control: AbstractControl): ValidationErrors | null
     return err;
   }    
 
-  if(!period || (period.toLowerCase() != 'am' && period.toLowerCase() != 'pm')) {
+  if(period.toLowerCase() != 'am' && period.toLowerCase() != 'pm') {
     return err;
   }
 
@@ -47,30 +52,17 @@ export function timeFromString(stringValue: string): TimeDefinition {
     return emptyValue;
   }
 
-  let part1: string;
-  let part2: string;
-  let part3: string;
-  let sepIndex: number;
+  const regex = /(\d{1,2}):(\d{1,2})(\s{1,})(am|pm)/i;
+  const parts = stringValue.match(regex);
 
-  sepIndex = stringValue.indexOf(':');
-  part1 = stringValue.substr(0, sepIndex).trim();
 
-  stringValue = stringValue.replace(part1+':', '');
-  sepIndex = stringValue.trim().indexOf(' ');
-  part2 = stringValue.substr(0, sepIndex).trim();
-  part3 = stringValue.replace(part2, '').trim();
+  if(!parts) {
+    return null;
+  }  
 
-  if(isNaN(part1 as any)) {
-    return emptyValue;
-  }
-
-  if(isNaN(part2 as any)) {
-    return emptyValue;
-  }    
-
-  if(part3.toLowerCase() !== 'am' && part3.toLowerCase() != 'pm') {
-    return emptyValue;
-  }    
+  let part1: string = parts[1];
+  let part2: string = parts[2];
+  let part3: string = parts[4];
 
   return new Time(part1, part2, part3);
 } 

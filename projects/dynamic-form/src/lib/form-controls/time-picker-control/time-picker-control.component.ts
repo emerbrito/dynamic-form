@@ -7,7 +7,7 @@ import { Subject, Subscription } from 'rxjs';
 import { distinctUntilChanged } from 'rxjs/operators';
 
 import { TimeDefinition, Time } from '../../models/config.models';
-import { timeValidator } from '../../models/time.validator';
+import { timeValidator, timeFromString } from '../../models/time.validator';
 
 @Component({
   selector: 'eb-time-picker-control',
@@ -77,11 +77,11 @@ export class TimePickerControlComponent implements MatFormFieldControl<string>, 
     return this.timeToString(t);
   }
   set value(time: string | null) {    
-    let t = this.timeFromString(time);
+    let t = timeFromString(time);
     this.parts.setValue({
-      hour: t.hour,
-      min: t.min,
-      period: t.period
+      hour: t ? t.hour : '',
+      min: t ? t.min : '',
+      period: t ? t.period : ''
     });
     this.onChange(time);
     this.onTouched();
@@ -169,42 +169,6 @@ export class TimePickerControlComponent implements MatFormFieldControl<string>, 
 
     return `${hours}:${min} ${period}`;
   }
-
-  timeFromString(stringValue: string): TimeDefinition {
-
-    let emptyValue = new Time('','','');
-
-    if(!stringValue) {
-      return emptyValue;
-    }
-
-    let part1: string;
-    let part2: string;
-    let part3: string;
-    let sepIndex: number;
-
-    sepIndex = stringValue.indexOf(':');
-    part1 = stringValue.substr(0, sepIndex).trim();
-
-    stringValue = stringValue.replace(part1+':', '');
-    sepIndex = stringValue.trim().indexOf(' ');
-    part2 = stringValue.substr(0, sepIndex).trim();
-    part3 = stringValue.replace(part2, '').trim();
-
-    if(isNaN(part1 as any)) {
-      return emptyValue;
-    }
-
-    if(isNaN(part2 as any)) {
-      return emptyValue;
-    }    
-
-    if(part3.toLowerCase() !== 'am' && part3.toLowerCase() != 'pm') {
-      return emptyValue;
-    }    
-
-    return new Time(part1, part2, part3);
-  }  
 
   // MatFormFieldControl implementation
 

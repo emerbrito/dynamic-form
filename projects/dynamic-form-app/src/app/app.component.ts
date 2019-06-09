@@ -32,7 +32,7 @@ export class AppComponent implements OnInit {
             name: 'time',
             label: "Time",
             type: ControlType.Timepicker,
-            value: '12:45 PM'          
+            //value: '12:45 PM'          
           } as TimePickerOptions,          
           {
             name: 'fullname',
