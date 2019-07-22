@@ -38,9 +38,12 @@ export class TimePickerControlComponent implements MatFormFieldControl<string>, 
   @Input()
   get disabled(): boolean { return this._disabled; }
   set disabled(value: boolean) {
-    this._disabled = coerceBooleanProperty(value);
-    this._disabled ? this.parts.disable() : this.parts.enable();
-    this.stateChanges.next();
+    let boolValue = coerceBooleanProperty(value);
+    if(boolValue != this._disabled) {
+      this._disabled = coerceBooleanProperty(value);
+      this._disabled ? this.parts.disable() : this.parts.enable();
+      this.stateChanges.next();
+    }
   }
 
   get empty() {
@@ -78,14 +81,29 @@ export class TimePickerControlComponent implements MatFormFieldControl<string>, 
   }
   set value(time: string | null) {    
     let t = timeFromString(time);
-    this.parts.setValue({
-      hour: t ? t.hour : '',
-      min: t ? t.min : '',
-      period: t ? t.period : ''
-    });
-    this.onChange(time);
-    this.onTouched();
-    this.stateChanges.next();    
+    let update: boolean = false;
+
+    if(this.parts.controls['hour'].value != t.hour) {
+      update = true;
+    }
+    else if(this.parts.controls['min'].value != t.min) {
+      update = true;
+    }   
+    else if(this.parts.controls['period'].value != t.period) {
+      update = true;
+    }        
+
+    if(update) {
+      this.parts.setValue({
+        hour: t ? t.hour : '',
+        min: t ? t.min : '',
+        period: t ? t.period : ''
+      });
+      this.onChange(time);
+      this.onTouched();
+      this.stateChanges.next();   
+    } 
+    
   }
   
   constructor

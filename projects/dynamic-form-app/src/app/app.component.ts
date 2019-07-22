@@ -29,10 +29,22 @@ export class AppComponent implements OnInit {
       {
         controls: [
           {
+            name: 'enterTime',
+            label: "Enter Time",            
+            type: ControlType.RadioGroup,
+            items: [
+              { value: 1, text: 'Yes' },
+              { value: 2, text: 'No' }
+            ]
+          } as RadioGroupOptions,            
+          {
             name: 'time',
             label: "Time",
             type: ControlType.Timepicker,
-            //value: '12:45 PM'          
+            //value: '12:45 PM',
+            expressions: {
+              visible: "${enterTime} === 1"
+            }   
           } as TimePickerOptions,          
           {
             name: 'fullname',
