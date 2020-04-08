@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { UtilityService } from 'projects/dynamic-form/src/lib/services/utility.service';
 import { DynamicFormService } from 'projects/dynamic-form/src/lib/services/dynamic-form.service';
-import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, NumericInputOptions, TimePickerOptions } from 'projects/dynamic-form/src/lib/models/config.models';
+import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, DatePickerOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, NumericInputOptions, TimePickerOptions } from 'projects/dynamic-form/src/lib/models/config.models';
 import { ControlType, ToggleMode } from 'projects/dynamic-form/src/lib/models/common.models';
 //import { UtilityService, DynamicFormService, FormConfig, ControlType, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, ToggleMode  } from 'dynamic-form';
 
@@ -36,7 +36,13 @@ export class AppComponent implements OnInit {
               { value: 1, text: 'Yes' },
               { value: 2, text: 'No' }
             ]
-          } as RadioGroupOptions,            
+          } as RadioGroupOptions, 
+          {
+            name: 'enterDate',
+            label: 'Enter Date',
+            type: ControlType.Datepicker,
+            minDate: "2020-04-08"
+          } as any,                         
           {
             name: 'time',
             label: "Time",

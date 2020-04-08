@@ -11,7 +11,9 @@ const DefaultMessages = {
   maxLength: 'Maximun length is {1}. Current: {2}.',
   matDatepickerParse: 'Invalid date',
   pattern: "Value didn't match the expected pattern.",
-  timeError: "Invalid time."
+  timeError: "Invalid time.",
+  matDatepickerMin: "Date is before expected range.",
+  matDatepickerMax: "Date is after expected range."
 };
 
 @Injectable({
@@ -105,6 +107,11 @@ export class UtilityService {
    */
   formatString(message: string, ...params: any[]): string {
     let m = message;
+
+    if(!m) {
+      return m;
+    }
+
     if(params && params.length > 0) {
         params.forEach((value, i) => {
             if(params.length === 3) {
