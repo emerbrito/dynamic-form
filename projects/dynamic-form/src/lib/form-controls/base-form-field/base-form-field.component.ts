@@ -218,9 +218,25 @@ export class BaseFormFieldComponent implements OnInit, OnDestroy {
  
   setVisible(isVisible: boolean): void {
 
-    this.setDisabled(!isVisible);
-    this.visible = isVisible;
+    let disableState = false;
 
+    if(!isVisible) {
+      disableState = true;
+    }   
+    else {
+      if(this.disabledCondition) {
+
+        if(this.formGroup.parent) {
+          disableState = this.disabledCondition(this.formGroup.parent as FormGroup);
+        }
+        else {
+          disableState = this.disabledCondition(this.formGroup);
+        }        
+      }
+    } 
+
+    this.setDisabled(disableState);
+    this.visible = isVisible;
   }  
 
   errorMessage(): string {
