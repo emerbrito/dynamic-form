@@ -168,6 +168,11 @@ export class DynamicFormInternals {
 
     private _options: FormConfig;
     private _form: FormGroup;
+    private _disabled: boolean;
+
+    get disabled(): boolean {
+        return this._disabled;
+    }
 
     get form(): FormGroup {
         return this._form;
@@ -181,6 +186,14 @@ export class DynamicFormInternals {
         this._form = form;
         this._options = options;
     }
+
+    setDisabled(): void {
+        this._disabled = true;
+    }
+
+    setEnabled(): void {
+        this._disabled = false;
+    }    
 
     value(): Model {
 

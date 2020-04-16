@@ -11,7 +11,7 @@ import { TextBlockComponent } from '../form-controls/text-block/text-block.compo
 import { TextInputComponent } from '../form-controls/text-input/text-input.component';
 import { TimePickerComponent } from '../form-controls/time-picker/time-picker.component';
 import { ToggleInputComponent } from '../form-controls/toggle-input/toggle-input.component';
-import { ControlOptions, FormConfig } from '../models/config.models';
+import { ControlOptions, FormConfig, DynamicFormInternals } from '../models/config.models';
 
 const components = {
   datepicker: DatePickerComponent,
@@ -35,6 +35,7 @@ export class DynamicComponentDirective implements OnInit, OnDestroy {
   @Input() formConfig: FormConfig;
   @Input() controlPath: { [key: string]: string };
   @Input() group: FormGroup;  
+  @Input() internals: DynamicFormInternals;
   component: ComponentRef<any>;
   _group: FormGroup;    
 
@@ -55,6 +56,7 @@ export class DynamicComponentDirective implements OnInit, OnDestroy {
     this.component.instance.config = this.controlConfig;
     this.component.instance.formGroup = this.group;
     this.component.instance.formConfig = this.formConfig;
+    this.component.instance.internals = this.internals;
    
     if(this.controlConfig.expressions) {
       if(this.controlConfig.expressions.disabled) {

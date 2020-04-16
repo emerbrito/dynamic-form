@@ -10,7 +10,8 @@
         [controlPath]="controlsFullPath"
         [controlConfig]="control" 
         [formConfig]="config"
-        [group]="formGroup" >    
+        [group]="formGroup" 
+        [internals]="internals">    
       </ng-container>
   
     </div>
@@ -66,7 +67,8 @@
             [controlConfig]="control" 
             [controlPath]="controlsFullPath"
             [formConfig]="config"
-            [group]="formGroup.get(group.name || 'group' + index)">
+            [group]="formGroup.get(group.name || 'group' + index)"
+            [internals]="internals">
           </ng-container>
       
         </div>        

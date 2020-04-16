@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { UtilityService } from 'projects/dynamic-form/src/lib/services/utility.service';
 import { DynamicFormService } from 'projects/dynamic-form/src/lib/services/dynamic-form.service';
 import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, DatePickerOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, NumericInputOptions, TimePickerOptions } from 'projects/dynamic-form/src/lib/models/config.models';
 import { ControlType, ToggleMode } from 'projects/dynamic-form/src/lib/models/common.models';
+import { DynamicFormComponent } from 'projects/dynamic-form/src/lib/dynamic-form/dynamic-form.component';
 //import { UtilityService, DynamicFormService, FormConfig, ControlType, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, ToggleMode  } from 'dynamic-form';
 
 @Component({
@@ -13,7 +14,9 @@ import { ControlType, ToggleMode } from 'projects/dynamic-form/src/lib/models/co
 })
 export class AppComponent implements OnInit {
 
+  @ViewChild('survey') form: DynamicFormComponent;
   data: DynamicFormInternals;
+  formDisabled: boolean = false;
 
   constructor(
     private utility: UtilityService,
@@ -151,9 +154,7 @@ export class AppComponent implements OnInit {
     // }
 
     this.data = this.service.create(config, sampleData);
-    console.log(this.data);
-
-    this.data.form.valueChanges.subscribe(v => console.log('form', v));
+    //this.data.form.valueChanges.subscribe(v => console.log('form', v));
 
   }
 
@@ -161,6 +162,8 @@ export class AppComponent implements OnInit {
     console.log('submitted');
     console.log(e);
     console.log(e.value());
+    this.formDisabled = true;
+    this.form.stepper.selectedIndex = 0;
   }
 
 }

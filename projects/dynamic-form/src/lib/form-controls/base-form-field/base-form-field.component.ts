@@ -4,7 +4,7 @@ import { Subscription } from 'rxjs';
 
 import { UtilityService } from '../../services/utility.service';
 import { Appearance, LabelDisplayMode, ControlType } from '../../models/common.models';
-import { ExtendedFieldOptions, FormConfig } from '../../models/config.models';
+import { ExtendedFieldOptions, FormConfig, DynamicFormInternals } from '../../models/config.models';
 
 @Component({
   selector: 'eb-base-form-field',
@@ -16,6 +16,7 @@ export class BaseFormFieldComponent implements OnInit, OnDestroy {
   @Input() config: ExtendedFieldOptions;
   @Input() formConfig: FormConfig;
   @Input() formGroup: FormGroup;
+  @Input() internals: DynamicFormInternals;
 
   disabled: boolean = false;
   visible: boolean = true;
@@ -202,40 +203,52 @@ export class BaseFormFieldComponent implements OnInit, OnDestroy {
 
   setDisabled(disabled: boolean): void {
 
-    if(disabled) {
-      this.formControl.patchValue(null, { onlySelf: true, emitEvent: false });
-      this.formControl.disable({ onlySelf: true, emitEvent: false });      
-      this.disabled = true;
-    }
-    else {
-      this.formControl.enable({ onlySelf: true, emitEvent: false });      
-      this.disabled = false;
+    if(this.internals.disabled || (this.formGroup && this.formGroup.disabled)) {
+      disabled = true;
     }
 
+    if(this.formControl.disabled === disabled) {
+      return;
+    }
+
+    if(disabled) {
+      this.formControl.patchValue(null, { onlySelf: true, emitEvent: false });
+      this.formControl.disable({ onlySelf: true, emitEvent: false });            
+    }
+    else {
+      this.formControl.enable({ onlySelf: true, emitEvent: false });         
+    }
+
+    this.disabled = disabled;
     this.formControl.updateValueAndValidity({ emitEvent: false });
 
   } 
  
   setVisible(isVisible: boolean): void {
 
-    let disableState = false;
-
     if(!isVisible) {
-      disableState = true;
+      this.setDisabled(true);
     }   
     else {
-      if(this.disabledCondition) {
-
-        if(this.formGroup.parent) {
-          disableState = this.disabledCondition(this.formGroup.parent as FormGroup);
-        }
+      if(this.formGroup && this.formGroup.enabled) {        
+        if(this.disabledCondition) {
+          let disableState = false;
+  
+          if(this.formGroup.parent) {
+            disableState = this.disabledCondition(this.formGroup.parent as FormGroup);
+          }
+          else {
+            disableState = this.disabledCondition(this.formGroup);
+          }        
+  
+          this.setDisabled(disableState);
+        }  
         else {
-          disableState = this.disabledCondition(this.formGroup);
-        }        
+          this.setDisabled(false);
+        }
       }
     } 
 
-    this.setDisabled(disableState);
     this.visible = isVisible;
   }  
 

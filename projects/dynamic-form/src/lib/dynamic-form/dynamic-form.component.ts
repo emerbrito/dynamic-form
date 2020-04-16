@@ -73,6 +73,14 @@ export class DynamicFormComponent implements OnInit, OnChanges {
   }    
 
   ngOnInit() {
+
+    if(this.disabled) {
+      this.internals.setDisabled();
+    }
+    else {
+      this.internals.setEnabled();
+    }
+
   }
 
   ngOnChanges(changes: SimpleChanges) {
@@ -94,9 +102,11 @@ export class DynamicFormComponent implements OnInit, OnChanges {
 
     if(changesDisabled != null) {
       if(changesDisabled.currentValue == true) {
-        this.formGroup.disable();
+        this.internals.setDisabled();
+        this.formGroup.disable({ onlySelf: false, emitEvent: true});
       }
       else {
+        this.internals.setEnabled();
         this.formGroup.enable();
       }
     }
