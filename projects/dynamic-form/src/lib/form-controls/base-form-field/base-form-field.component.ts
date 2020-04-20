@@ -175,7 +175,7 @@ export class BaseFormFieldComponent implements OnInit, OnDestroy {
     let visibileState: boolean;
 
     // only execute disable condition if form is not completelly disabled.
-    if(!this.formGroup.disabled && this.disabledCondition) {
+    if(this.disabledCondition) {
 
       if(this.formGroup.parent) {
         disableState = this.disabledCondition(this.formGroup.parent as FormGroup);
@@ -203,15 +203,15 @@ export class BaseFormFieldComponent implements OnInit, OnDestroy {
 
   setDisabled(disabled: boolean): void {
 
-    if(this.internals.disabled || (this.formGroup && this.formGroup.disabled)) {
+    if(this.config.name == "if_show_date_is_yes") {
+      console.log('setDisabled: ', disabled);
+    }    
+
+    if(this.internals.disabled) {
       disabled = true;
+      this.formControl.disable({ onlySelf: true, emitEvent: false });
     }
-
-    if(this.formControl.disabled === disabled) {
-      return;
-    }
-
-    if(disabled) {
+    else if(disabled) {
       this.formControl.patchValue(null, { onlySelf: true, emitEvent: false });
       this.formControl.disable({ onlySelf: true, emitEvent: false });            
     }
@@ -226,26 +226,28 @@ export class BaseFormFieldComponent implements OnInit, OnDestroy {
  
   setVisible(isVisible: boolean): void {
 
+    if(this.config.name == "if_show_date_is_yes") {
+      console.log('setVisible: ', isVisible);
+    }
+
     if(!isVisible) {
       this.setDisabled(true);
     }   
     else {
-      if(this.formGroup && this.formGroup.enabled) {        
-        if(this.disabledCondition) {
-          let disableState = false;
-  
-          if(this.formGroup.parent) {
-            disableState = this.disabledCondition(this.formGroup.parent as FormGroup);
-          }
-          else {
-            disableState = this.disabledCondition(this.formGroup);
-          }        
-  
-          this.setDisabled(disableState);
-        }  
-        else {
-          this.setDisabled(false);
+      if(this.disabledCondition) {
+        let disableState = false;
+
+        if(this.formGroup.parent) {
+          disableState = this.disabledCondition(this.formGroup.parent as FormGroup);
         }
+        else {
+          disableState = this.disabledCondition(this.formGroup);
+        }        
+
+        this.setDisabled(disableState);
+      }  
+      else {
+        this.setDisabled(false);
       }
     } 
 
