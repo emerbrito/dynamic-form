@@ -14,18 +14,17 @@ import { BaseFormFieldComponent } from '../base-form-field/base-form-field.compo
 export class DatePickerComponent extends BaseFormFieldComponent implements OnInit {
 
   @Input()
-  config: DatePickerOptions;   
+  config: DatePickerOptions;
 
-  constructor(
-    protected utility: UtilityService,
-  ) 
-  { 
+  constructor(protected utility: UtilityService)
+  {
     super(utility);
+
   }
 
   get maxDate(): Date {
-    return this.config.maxDate;    
-  }  
+    return this.config.maxDate;
+  }
 
   get minDate(): Date {
     return this.config.minDate;
@@ -40,7 +39,25 @@ export class DatePickerComponent extends BaseFormFieldComponent implements OnIni
   }
 
   ngOnInit() {
+    console.log('Date picker initialized');
     super.ngOnInit();
+  }
+
+  dateFilter = (dateValue: Date | null): boolean => {
+
+    console.log('dateFilter()', dateValue);
+    console.log('config', this.config);
+    if(!this.config || !this.config.preventToday) {
+      return true;
+    }
+
+    const value = dateValue ? new Date(dateValue) : new Date();
+    const today = new Date();
+
+    value.setHours(0,0,0,0);
+    today.setHours(0,0,0,0);
+
+    return value.getTime() !== today.getTime();
   }
 
 }

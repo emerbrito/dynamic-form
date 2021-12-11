@@ -1,9 +1,9 @@
 import { FormGroup, } from '@angular/forms';
 import { ControlType, DatePickerViewMode, LabelDisplayMode, Appearance, ContentAlignment, ToggleMode, Color, ButtonType, StepperLabelPosition } from './common.models';
 
-export interface ButtonOptions {    
+export interface ButtonOptions {
     text?: string;
-    color?: Color,        
+    color?: Color,
 }
 
 export interface ControlExpressions {
@@ -12,9 +12,9 @@ export interface ControlExpressions {
 }
 
 export interface ControlGroup {
-    title?: string,    
+    title?: string,
     name?: string,
-    controls: ControlOptions[]    
+    controls: ControlOptions[]
 }
 
 export interface ControlOptions {
@@ -26,6 +26,7 @@ export interface ControlOptions {
 export interface DatePickerOptions extends ExtendedFieldOptions {
     maxDate?: Date,
     minDate?: Date,
+    preventToday?: boolean,
     startDate: Date,
     value?: Date,
     activeView?: DatePickerViewMode
@@ -40,12 +41,12 @@ export interface Expressions {
     visible: string
 }
 
-export interface ExtendedFieldOptions extends FieldOptions {    
+export interface ExtendedFieldOptions extends FieldOptions {
     labelMode?: LabelDisplayMode,
     appearance?: Appearance,
-    hint?: string,    
-    placeholder?: string, 
-    width?: string 
+    hint?: string,
+    placeholder?: string,
+    width?: string
 }
 
 export interface FieldOptions extends ControlOptions {
@@ -55,7 +56,7 @@ export interface FieldOptions extends ControlOptions {
     value?: any
 }
 
-export interface FormButtons {    
+export interface FormButtons {
     align?: ContentAlignment,
     type?: ButtonType,
     next?: string | ButtonOptions,
@@ -66,9 +67,9 @@ export interface FormButtons {
 export interface FormConfig {
     appearance?: Appearance,
     labels?: LabelDisplayMode,
-    inputWidth?: string   
-    stepperTitles?: StepperLabelPosition,     
-    buttons?: FormButtons,   
+    inputWidth?: string
+    stepperTitles?: StepperLabelPosition,
+    buttons?: FormButtons,
     controlGroups: ControlGroup[],
 }
 
@@ -147,7 +148,7 @@ export interface Validation {
     email: boolean,
     minLength: number,
     maxLength: number,
-    pattern: string,    
+    pattern: string,
 }
 
 export interface ValidationMessages {
@@ -181,7 +182,7 @@ export class DynamicFormInternals {
     get settings(): FormConfig {
         return this._options;
     }
-  
+
     constructor(form: FormGroup, options: FormConfig) {
         this._form = form;
         this._options = options;
@@ -193,7 +194,7 @@ export class DynamicFormInternals {
 
     setEnabled(): void {
         this._disabled = false;
-    }    
+    }
 
     value(): Model {
 
@@ -202,15 +203,15 @@ export class DynamicFormInternals {
 
         if(this._options.controlGroups.length > 1) {
 
-            this._options.controlGroups.forEach(ctg => {           
+            this._options.controlGroups.forEach(ctg => {
 
                 fgroup = this._form.get(ctg.name) as FormGroup;
                 model = {
                     ...model,
                     ...fgroup.value
                 };
-    
-            })            
+
+            })
 
         }
         else if(this._options.controlGroups.length === 1) {
@@ -218,26 +219,26 @@ export class DynamicFormInternals {
             model = {
                 ...model,
                 ...this._form.value
-            };            
+            };
 
         }
-    
+
         return model;
-      
-    }    
+
+    }
 
     private buildModel(): Model {
 
         let model: Model = {};
-        
-        this._options.controlGroups.forEach(ctg => {           
+
+        this._options.controlGroups.forEach(ctg => {
             if(ctg.controls) {
                 ctg.controls.forEach(ctl => {
                     if(ctl.type && ctl.type !== ControlType.TextBlock) {
                         model[ctl.name] = null;
                     }
                 })
-            }            
+            }
         })
 
         return model;

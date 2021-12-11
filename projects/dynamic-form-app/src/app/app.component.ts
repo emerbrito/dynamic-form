@@ -27,25 +27,26 @@ export class AppComponent implements OnInit {
 
     let config = {} as FormConfig;
     let sampleData: { [key:string]: any} = {}
-   
+
     config.controlGroups = [
       {
         controls: [
           {
             name: 'enterTime',
-            label: "Enter Time",            
+            label: "Enter Time",
             type: ControlType.RadioGroup,
             items: [
               { value: 1, text: 'Yes' },
               { value: 2, text: 'No' }
             ]
-          } as RadioGroupOptions, 
+          } as RadioGroupOptions,
           {
             name: 'enterDate',
             label: 'Enter Date',
             type: ControlType.Datepicker,
-            minDate: "2020-04-08"
-          } as any,                         
+            minDate: "2021-12-01",
+            preventToday: true
+          } as any,
           {
             name: 'time',
             label: "Time",
@@ -53,8 +54,8 @@ export class AppComponent implements OnInit {
             //value: '12:45 PM',
             expressions: {
               visible: "${enterTime} === 1"
-            }   
-          } as TimePickerOptions,          
+            }
+          } as TimePickerOptions,
           {
             name: 'fullname',
             label: "Full Name",
@@ -71,7 +72,7 @@ export class AppComponent implements OnInit {
               max: 55,
               min: 18
             }
-          } as NumericInputOptions,          
+          } as NumericInputOptions,
           {
             name: 'city',
             label: "City",
@@ -81,7 +82,7 @@ export class AppComponent implements OnInit {
           {
             name: 'registered',
             label: 'Voter Registration',
-            text: "Registered voter",            
+            text: "Registered voter",
             type: ControlType.ToogleButton,
             expressions: {
               visible: "${age} > 18"
@@ -89,7 +90,7 @@ export class AppComponent implements OnInit {
           } as ToggleOptions,
           {
             name: 'affiliation',
-            label: "Party Affiliation",            
+            label: "Party Affiliation",
             type: ControlType.RadioGroup,
             items: [
               { value: 1, text: 'Democratic' },
@@ -99,10 +100,10 @@ export class AppComponent implements OnInit {
             expressions: {
               disabled: '!${registered};'
             }
-          } as RadioGroupOptions,   
+          } as RadioGroupOptions,
           {
             name: 'countries',
-            label: "Countries Visited Past 6 Months",            
+            label: "Countries Visited Past 6 Months",
             type: ControlType.MultiSelect,
             items: [
               { value: 1, text: 'Brazil' },
@@ -112,10 +113,10 @@ export class AppComponent implements OnInit {
             ],
             expressions: {
               disabled: '!${registered};'
-            }            
-          } as RadioGroupOptions,                         
-        ] 
-      },      
+            }
+          } as RadioGroupOptions,
+        ]
+      },
       {
         controls: [
           {
@@ -141,8 +142,8 @@ export class AppComponent implements OnInit {
               required: 'You must agree to the terms and conditions'
             }
           } as ToggleOptions
-        ] 
-      },            
+        ]
+      },
     ];
 
     // sampleData = {

@@ -13,7 +13,8 @@ const DefaultMessages = {
   pattern: "Value didn't match the expected pattern.",
   timeError: "Invalid time.",
   matDatepickerMin: "Date is before expected range.",
-  matDatepickerMax: "Date is after expected range."
+  matDatepickerMax: "Date is after expected range.",
+  matDatepickerFilter: "The selected date is not allowed."
 };
 
 @Injectable({
@@ -33,7 +34,7 @@ export class UtilityService {
     let errorMsg: string | Function;
     let errorKey: string;
     let msg: string;
-    let error: any;    
+    let error: any;
 
     if(!formControl.invalid) {
       return null;
@@ -48,57 +49,57 @@ export class UtilityService {
     }
     else if (DefaultMessages[errorKey]) {
       errorMsg = DefaultMessages[errorKey];
-    } 
+    }
 
     switch(errorKey) {
-      case 'min':     
+      case 'min':
         if (typeof errorMsg === "function") {
           msg = errorMsg(options.label, error.min, error.actual);
-        }         
+        }
         else {
           msg = this.formatString(errorMsg, options.label, error.min, error.actual);
         }
         break;
-                
+
       case 'max':
         if (typeof errorMsg === "function") {
           msg = errorMsg(options.label, error.max, error.actual);
-        }         
+        }
         else {
           msg = this.formatString(errorMsg, options.label, error.max, error.actual);
-        }     
-        break;         
+        }
+        break;
 
-      case 'minLength':  
+      case 'minLength':
         if (typeof errorMsg === "function") {
           msg = errorMsg(options.label, error.requiredLength, error.actualLength);
-        }         
+        }
         else {
           msg = this.formatString(errorMsg, options.label, error.requiredLength, error.actualLength);
-        }     
-        break;       
+        }
+        break;
 
       case 'maxLength':
         if (typeof errorMsg === "function") {
           msg = errorMsg(options.label, error.requiredLength, error.actualLength);
-        }         
+        }
         else {
           msg = this.formatString(errorMsg, options.label, error.requiredLength, error.actualLength)
-        }     
-        break;         
+        }
+        break;
 
       default:
         if (typeof errorMsg === "function") {
           msg = errorMsg(options.label);
-        }         
+        }
         else {
           msg = this.formatString(errorMsg, options.label);
-        }              
-    }    
+        }
+    }
 
     return msg;
 
-  }  
+  }
 
   /**
    * Formats a string by replacing tokens within parameters.
@@ -120,25 +121,25 @@ export class UtilityService {
         });
     }
     return m;
-  }  
+  }
 
   /**
    * Performs a deep copy of an object, including complex objects and arrays.
    * @param instance The object to deep copy.
    */
   copy(instance: any) {
-    
+
     let copy: any;
     let i: number;
     let key: string;
-  
+
     if (typeof instance !== 'object') {
       return instance;
     }
     if (!instance) {
       return instance;
     }
-  
+
     if ('[object Array]' === Object.prototype.toString.apply(instance)) {
       copy = [];
       for (i = 0; i < instance.length; i += 1) {
@@ -146,7 +147,7 @@ export class UtilityService {
       }
       return copy;
     }
-  
+
     copy = {};
     for (key in instance) {
       if (instance.hasOwnProperty(key)) {
@@ -154,6 +155,6 @@ export class UtilityService {
       }
     }
     return copy;
-  }   
+  }
 
 }

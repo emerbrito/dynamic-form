@@ -5,15 +5,16 @@
   </div>
 
   <mat-form-field [floatLabel]="floatLabel" [appearance]="appearance" [ngStyle]="style">
-          
-    <mat-label *ngIf="useFloatingLabel">{{config.label}}</mat-label>  
 
-    <input matInput 
-      placeholder="{{config.placeholder}}"    
+    <mat-label *ngIf="useFloatingLabel">{{config.label}}</mat-label>
+
+    <input matInput
+      placeholder="{{config.placeholder}}"
       [formControl]="formControl"
-      [matDatepicker]="picker" 
+      [matDatepicker]="picker"
       [min]="minDate"
-      [max]="maxDate">
+      [max]="maxDate"
+      [matDatepickerFilter]="dateFilter">
 
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-datepicker #picker [startView]="activeView" [startAt]="startDate"></mat-datepicker>
@@ -21,6 +22,6 @@
     <mat-error *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
     <mat-hint *ngIf="config.hint">{{config.hint}}</mat-hint>
 
-  </mat-form-field>  
+  </mat-form-field>
 
 </div>

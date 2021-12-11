@@ -1,6 +1,6 @@
 {
   "name": "@emerbrito/dynamic-form",
-  "version": "0.0.1",
+  "version": "0.0.18",
   "description": "Creates forms (including complex, multi page questionnaires and surveys) from configuration. Handles conditional visibility and state (enable/disable controls).",
   "author": {
     "name": "Emerson Brito"
