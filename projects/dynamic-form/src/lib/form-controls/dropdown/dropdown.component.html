@@ -5,18 +5,18 @@
   </div>
 
   <mat-form-field [floatLabel]="floatLabel" [appearance]="appearance" [ngStyle]="style">
-            
+
     <mat-label *ngIf="useFloatingLabel">{{config.label}}</mat-label>
 
     <mat-select placeholder="{{config.placeholder}}" [formControl]="formControl">
-      <mat-option *ngFor="let item of items" [value]="item.value">
+      <mat-option *ngFor="let item of items" [value]="item.value" [disabled]="item.disabled">
         {{item.text}}
       </mat-option>
-    </mat-select>          
+    </mat-select>
 
     <mat-error *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
     <mat-hint *ngIf="config.hint">{{config.hint}}</mat-hint>
-    
-  </mat-form-field>  
 
-</div>  
+  </mat-form-field>
+
+</div>

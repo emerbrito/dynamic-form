@@ -2,18 +2,18 @@
 
   <label class="control-label" [ngClass]="{ 'disabled-label': disabled }"  *ngIf="config.label">{{config.label}}
     <span class="mat-form-field-required-marker" *ngIf="required && !disabled"> *</span>
-  </label> 
+  </label>
 
   <mat-selection-list dense (selectionChange)="selectionChange($event)">
-    <mat-list-option *ngFor="let item of items" 
-      checkboxPosition="before"       
-      [disabled]="formControl.disabled"
+    <mat-list-option *ngFor="let item of items"
+      checkboxPosition="before"
+      [disabled]="formControl.disabled || item.disabled"
       [selected]="selected(item)"
       [value]="item.value">
       {{item.text}}
     </mat-list-option>
-  </mat-selection-list>  
+  </mat-selection-list>
 
   <mat-error *ngIf="formControl.invalid">{{errorMessage()}}</mat-error>
 
-</div>  
+</div>

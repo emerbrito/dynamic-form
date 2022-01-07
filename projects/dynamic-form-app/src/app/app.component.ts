@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 
 import { UtilityService } from 'projects/dynamic-form/src/lib/services/utility.service';
 import { DynamicFormService } from 'projects/dynamic-form/src/lib/services/dynamic-form.service';
-import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, DatePickerOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, NumericInputOptions, TimePickerOptions } from 'projects/dynamic-form/src/lib/models/config.models';
+import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, DatePickerOptions, DropdownOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, NumericInputOptions, TimePickerOptions, ControlOptions } from 'projects/dynamic-form/src/lib/models/config.models';
 import { ControlType, ToggleMode } from 'projects/dynamic-form/src/lib/models/common.models';
 import { DynamicFormComponent } from 'projects/dynamic-form/src/lib/dynamic-form/dynamic-form.component';
 //import { UtilityService, DynamicFormService, FormConfig, ControlType, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, ToggleMode  } from 'dynamic-form';
@@ -112,9 +112,34 @@ export class AppComponent implements OnInit {
               { value: 4, text: 'Spain' },
             ],
             expressions: {
-              disabled: '!${registered};'
+              //disabled: '!${registered};'
             }
           } as RadioGroupOptions,
+          {
+            name: 'countriesRadio',
+            label: "Countries Visited Past 6 Months",
+            type: ControlType.RadioGroup,
+            items: [
+              { value: 1, text: 'Brazil' },
+              { value: 2, text: 'Colombia' },
+              { value: 3, text: 'USA' },
+              { value: 4, text: 'Spain' },
+            ],
+            expressions: {
+              //disabled: '!${registered};'
+            }
+          } as RadioGroupOptions,
+          {
+            name: 'country',
+            label: "Country Visiting next",
+            type: ControlType.Dropdown,
+            items: [
+              { value: 1, text: 'Brazil?' },
+              { value: 2, text: 'Colombia' },
+              { value: 3, text: 'USA' },
+              { value: 4, text: 'Spain' },
+            ]
+          } as DropdownOptions
         ]
       },
       {
@@ -165,6 +190,33 @@ export class AppComponent implements OnInit {
     console.log(e.value());
     this.formDisabled = true;
     this.form.stepper.selectedIndex = 0;
+  }
+
+  test() {
+    //const choptions: DropdownOptions|RadioGroupOptions = this.data.settings.controlGroups[0].controls.find(c => c.name == 'countries');
+    const cboptions: DropdownOptions|RadioGroupOptions = this.data.settings.controlGroups[0].controls.find(c => c.name == 'country');
+    //const croptions: DropdownOptions|RadioGroupOptions = this.data.settings.controlGroups[0].controls.find(c => c.name == 'countriesRadio');
+    // console.log(choptions);
+    // console.log(croptions);
+    console.log(cboptions);
+
+    // if(choptions.items) {
+    //   choptions.items[0].text = "Brazil !!!";
+    //   choptions.items[0].disabled = true;
+    // }
+
+    // if(croptions.items) {
+    //   croptions.items[0].text = "Brazil !!!";
+    //   croptions.items[0].disabled = true;
+    // }
+
+    if(cboptions.items) {
+      cboptions.items[0].text = "Brazil !!!";
+      cboptions.items[0].disabled = true;
+    }
+
+    console.log(cboptions);
+
   }
 
 }

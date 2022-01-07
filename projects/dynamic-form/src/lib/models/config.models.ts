@@ -32,8 +32,7 @@ export interface DatePickerOptions extends ExtendedFieldOptions {
     activeView?: DatePickerViewMode
 }
 
-export interface DropdownOptions extends ExtendedFieldOptions {
-    items?: SelectItem[]
+export interface DropdownOptions extends ExtendedFieldOptions, SelectItemsList {
 }
 
 export interface Expressions {
@@ -53,7 +52,10 @@ export interface FieldOptions extends ControlOptions {
     label?: string,
     validation?: Validation,
     validationMessages?: ValidationMessages,
-    value?: any
+    value?: any,
+    options?: {
+      [key: string]: any
+    }
 }
 
 export interface FormButtons {
@@ -90,13 +92,17 @@ export interface NumericInputOptions extends ExtendedFieldOptions {
     decimalSeparator?: string
 }
 
-export interface RadioGroupOptions extends FieldOptions {
-    items?: SelectItem[]
+export interface RadioGroupOptions extends FieldOptions, SelectItemsList {
 }
 
 export interface SelectItem {
     text: string,
-    value?: any
+    value?: any,
+    disabled?: boolean
+}
+
+export interface SelectItemsList {
+  items?: SelectItem[]
 }
 
 export interface StepSelectionEvent {
