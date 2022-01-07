@@ -5,6 +5,7 @@ import { DynamicFormService } from 'projects/dynamic-form/src/lib/services/dynam
 import { FormConfig, TextInputOptions, DynamicFormInternals, ToggleOptions, DatePickerOptions, DropdownOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, NumericInputOptions, TimePickerOptions, ControlOptions } from 'projects/dynamic-form/src/lib/models/config.models';
 import { ControlType, ToggleMode } from 'projects/dynamic-form/src/lib/models/common.models';
 import { DynamicFormComponent } from 'projects/dynamic-form/src/lib/dynamic-form/dynamic-form.component';
+import { map, pairwise } from 'rxjs/operators';
 //import { UtilityService, DynamicFormService, FormConfig, ControlType, TextInputOptions, DynamicFormInternals, ToggleOptions, RadioGroupOptions, TextAreaOptions, TextBlockOptions, ToggleMode  } from 'dynamic-form';
 
 @Component({
@@ -182,6 +183,15 @@ export class AppComponent implements OnInit {
     this.data = this.service.create(config, sampleData);
     //this.data.form.valueChanges.subscribe(v => console.log('form', v));
 
+    //https://gist.github.com/oleksandrstarov/a3e1c764179639b08961e5ab56b89003
+
+    this.data.form.valueChanges
+    .pipe(
+      pairwise(),
+      map(([prev, curr]) => Object.keys(curr).find(key => prev[key] !== curr[key]))
+    )
+    .subscribe(key => console.log(key, this.data.form.controls[key].value));
+
   }
 
   submit(e: DynamicFormInternals): void {
@@ -190,33 +200,6 @@ export class AppComponent implements OnInit {
     console.log(e.value());
     this.formDisabled = true;
     this.form.stepper.selectedIndex = 0;
-  }
-
-  test() {
-    //const choptions: DropdownOptions|RadioGroupOptions = this.data.settings.controlGroups[0].controls.find(c => c.name == 'countries');
-    const cboptions: DropdownOptions|RadioGroupOptions = this.data.settings.controlGroups[0].controls.find(c => c.name == 'country');
-    //const croptions: DropdownOptions|RadioGroupOptions = this.data.settings.controlGroups[0].controls.find(c => c.name == 'countriesRadio');
-    // console.log(choptions);
-    // console.log(croptions);
-    console.log(cboptions);
-
-    // if(choptions.items) {
-    //   choptions.items[0].text = "Brazil !!!";
-    //   choptions.items[0].disabled = true;
-    // }
-
-    // if(croptions.items) {
-    //   croptions.items[0].text = "Brazil !!!";
-    //   croptions.items[0].disabled = true;
-    // }
-
-    if(cboptions.items) {
-      cboptions.items[0].text = "Brazil !!!";
-      cboptions.items[0].disabled = true;
-    }
-
-    console.log(cboptions);
-
   }
 
 }
